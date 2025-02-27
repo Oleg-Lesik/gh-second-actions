@@ -1,5 +1,5 @@
 name: test
-on: workflow_dispatch
+on: push
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,3 +16,18 @@ jobs:
       run: npm ci
     - name: Run test
       run: npm test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: fetch-repo[checkout]
+      uses: actions/checkout@v3
+    - name: check the repo files
+      run: ls -la
+    - name: Install Node latest
+      uses: actions/setup-node@v4
+      with:
+          node-version: 18
+    - name: install nmp ci
+      run: npm ci
+    - name: deploy
+      run: echo "simulating the deployment..."
